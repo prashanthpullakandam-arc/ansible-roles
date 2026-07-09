@@ -1,0 +1,3 @@
+- name: hello workd
+  ansible.builtin.debut:
+    msg: "hello world"
