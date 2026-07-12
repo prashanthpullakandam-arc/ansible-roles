@@ -1,0 +1,17 @@
+- name: load the app data
+  ansible.builtin.import_roles:
+    name: common
+    tasks_from: app-setup.yaml
+- name: load the nodejs data
+  ansible.builtin.import_roles:
+    name: common
+    tasks_from: nodejs-setup.yaml
+- name: load the systemd setup
+  ansible.builtin.import_roles:
+    name: common
+    tasks_from: systemd-setup.yaml
+- name: restrat service
+  ansible.builtin.systemd:
+    name: cart  
+    state: restarted
+    enabled: yes
