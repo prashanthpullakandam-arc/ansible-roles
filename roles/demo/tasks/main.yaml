@@ -1,3 +1,3 @@
-- name: hello workd
+- name: ansible demo calling from roles
   ansible.builtin.debug:
-    msg: "hello world"
+    msg: "i am getting called from main"
