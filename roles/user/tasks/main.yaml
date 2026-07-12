@@ -1,0 +1,18 @@
+- name: load the user
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-setup.yaml
+- name: load the node js
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: nodejs-setup.yaml
+- name: load the systemd
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: systemd-setup.yaml
+- name: enable the system
+  ansible.builtin.systemd:
+    name: user
+    state: restarted   
+    enabled: yes
+ 
