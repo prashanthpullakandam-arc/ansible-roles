@@ -4,19 +4,22 @@
     tasks_from: app-setup.yaml
 - name: node js setup
   ansible.builtin.import_role:
-    name: common 
+    name: common
     tasks_from: nodejs-setup.yaml
 - name: systemd setup
   ansible.builtin.import_role:
     name: common
     tasks_from: systemd-setup.yaml
-
+- name: copy mongo repor
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
 - name: install mongodb
   ansible.builtin.dnf:
     name: mongodb-mongosh
     state: present
 - name: check if data exisit in mongodb
-  ansible.builtin.command:  mongosh --host "{{ MONGODB_HOST }}" --quiet  --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+  ansible.builtin.command: mongosh --host "{{ MONGODB_HOST }}" --quiet  --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
   register: mongooutput
 - name: load data
   ansible.builtin.shell: mongosh --host "{{ MONGODB_HOST }}" </app/db/master-data.js
@@ -26,15 +29,3 @@
     name: catalogue
     state: started
     enabled: yes
-
-
-
-
-
-
-
-
-
-
-
-
