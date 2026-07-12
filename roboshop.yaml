@@ -1,0 +1,5 @@
+- name: roboshop main yaml for "{{ components }}"
+  hosts: "{{ components }}"
+  become: yes
+  roles:
+  - "{{ components }}"
